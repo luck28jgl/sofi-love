@@ -3,7 +3,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>My Love ❤️</title>
+  <title>Sofi My Love ❤️</title>
   
   <meta name="google-adsense-account" content="ca-pub-4704501585981299">
 
@@ -31,7 +31,16 @@ body  {
 	margin-top: 50px;
 	overflow: hidden;
 	-webkit-tap-highlight-color: transparent;
-  }
+}
+.envelope {
+    /* ...existing styles... */
+    --envelope-transform: rotateY(0deg);
+}
+
+.envelope.active {
+    --envelope-transform: rotateY(180deg);
+}
+
 .envelope {
 	--duration: 1000ms;
 
@@ -251,7 +260,7 @@ body  {
 }
 
 </style>
-<div class="envelope">
+<div class="envelope"  id="toggleEnvelope" >
 
 	<div class="envelope-inner">
 
@@ -264,8 +273,8 @@ body  {
 			</div>
 
 			<div class="address">
-				<p><span>To:</span> <span>My Love</span></p>
-				<p><span>From:</span> <span>Your Favorite Person</span></p>
+				<p><span>Para:</span> <span>Sofia</span></p>
+				<p><span>De:</span> <span>luck</span></p>
 			</div>
 
 		</div>
@@ -295,26 +304,32 @@ body  {
      crossorigin="anonymous"></script>
 
 <script>
+	const envelope = document.getElementById('toggleEnvelope');
+
+	envelope.addEventListener('click', function () {
+	envelope.classList.toggle('active');
+	});
+
 	document.addEventListener('contextmenu', function (e) {
-    e.preventDefault();
-  });
+		e.preventDefault();
+	});
   
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'F12') {
-      e.preventDefault();
-    }
-    if (e.ctrlKey && e.shiftKey && e.key === 'I') {
-      e.preventDefault();
-    }
-    if (e.ctrlKey && e.key === 'u') {
-      e.preventDefault();
-    }
-  });
+	document.addEventListener('keydown', function (e) {
+		if (e.key === 'F12') {
+		e.preventDefault();
+		}
+		if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+		e.preventDefault();
+		}
+		if (e.ctrlKey && e.key === 'u') {
+		e.preventDefault();
+		}
+	});
 </script>
 
   
 
 </body>
 </html>
-carta (1).html
-Mostrando carta (1).html
+<!-- carta (1).html
+Mostrando carta (1).html -->
