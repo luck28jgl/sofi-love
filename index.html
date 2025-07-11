@@ -19,9 +19,8 @@
 	box-sizing: border-box;
 }
 body  {
-	font-family: "Quicksand", sans-serif;
-	background: linear-gradient(to bottom right, #ffecec, #fff5f5, #ffebeb);
-	color: #333;
+	background: radial-gradient(circle, #ffffff, #ff9aa2);
+	font-family: 'Arial', sans-serif;	color: #333;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -32,6 +31,16 @@ body  {
 	overflow: hidden;
 	-webkit-tap-highlight-color: transparent;
 }
+        /* Estilos generales */
+        /* body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, #ff4d6d, #66101f);
+            font-family: 'Arial', sans-serif;
+        } */
 .envelope {
     /* ...existing styles... */
     --envelope-transform: rotateY(0deg);
@@ -47,8 +56,8 @@ body  {
 	--shadow-width: calc(var(--envelope-width) * 0.85);
 	--shadow-blur: 15px;
 
-	--envelope-width: 300px;
-	--envelope-height: 175px;
+	--envelope-width: 250px; /* Reducido de 300px */
+    --envelope-height: 150px; /* Reducido de 175px */
 	--envelope-clr-bg: #d14d44;
 	--envelope-clr-bg-side: #c24e46;
 	--envelope-clr-bg-bottom: #e15349;
@@ -258,7 +267,6 @@ body  {
     font-size: 1.8rem;  
     font-weight: bold; 
 }
-
 </style>
 <div class="envelope"  id="toggleEnvelope" >
 
@@ -306,8 +314,19 @@ body  {
 <script>
 	const envelope = document.getElementById('toggleEnvelope');
 
+	// Cargar el estado guardado al cargar la página
+	document.addEventListener('DOMContentLoaded', function () {
+		const isActive = localStorage.getItem('envelopeActive') === 'true';
+		if (isActive) {
+			envelope.classList.add('active');
+		}
+	});
+
+	// Alternar el estado y guardarlo
 	envelope.addEventListener('click', function () {
-	envelope.classList.toggle('active');
+		envelope.classList.toggle('active');
+		const isActive = envelope.classList.contains('active');
+		localStorage.setItem('envelopeActive', isActive);
 	});
 
 	document.addEventListener('contextmenu', function (e) {
