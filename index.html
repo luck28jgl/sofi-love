@@ -45,6 +45,30 @@ body  {
     /* ...existing styles... */
     --envelope-transform: rotateY(0deg);
 }
+  /* ...existing styles... */
+
+/* Estilo para el botón de reinicio */
+.reset-button {
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	top: 50px;
+	left: 60px;
+	margin-top: 20px;
+	padding: 1px;
+	font-size: 1.6rem;
+	font-weight: bold;
+	color: #fff;
+	background-color: #d14d44;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.reset-button:hover {
+	background-color: #c0392b;
+}
 
 .envelope.active {
     --envelope-transform: rotateY(180deg);
@@ -268,6 +292,10 @@ body  {
     font-weight: bold; 
 }
 </style>
+<header>
+	<button class="reset-button" id="resetButton">↺</button>
+
+</header>
 <div class="envelope"  id="toggleEnvelope" >
 
 	<div class="envelope-inner">
@@ -306,44 +334,48 @@ body  {
 	</div>
 
 </div>
+
+
 <!-- partial -->
  
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704501585981299"
      crossorigin="anonymous"></script>
 
 <script>
-	const envelope = document.getElementById('toggleEnvelope');
+  const envelope = document.getElementById('toggleEnvelope');
+  const resetButton = document.getElementById('resetButton');
 
-	// Cargar el estado guardado al cargar la página
-	document.addEventListener('DOMContentLoaded', function () {
-		const isActive = localStorage.getItem('envelopeActive') === 'true';
-		if (isActive) {
-			envelope.classList.add('active');
-		}
-	});
+  // Cargar el estado guardado al cargar la página
+  document.addEventListener('DOMContentLoaded', function () {
+    const isActive = localStorage.getItem('envelopeActive') === 'true';
+    if (isActive) {
+      envelope.classList.add('active');
+    }
+  });
 
-	// Alternar el estado y guardarlo
-	envelope.addEventListener('click', function () {
-		envelope.classList.toggle('active');
-		const isActive = envelope.classList.contains('active');
-		localStorage.setItem('envelopeActive', isActive);
-	});
+  // Alternar el estado y guardarlo
+  envelope.addEventListener('click', function () {
+    envelope.classList.toggle('active');
+    const isActive = envelope.classList.contains('active');
+    localStorage.setItem('envelopeActive', isActive);
+  });
 
-	document.addEventListener('contextmenu', function (e) {
-		e.preventDefault();
-	});
-  
-	document.addEventListener('keydown', function (e) {
-		if (e.key === 'F12') {
-		e.preventDefault();
-		}
-		if (e.ctrlKey && e.shiftKey && e.key === 'I') {
-		e.preventDefault();
-		}
-		if (e.ctrlKey && e.key === 'u') {
-		e.preventDefault();
-		}
-	});
+  // Reiniciar la carta al estado original
+  resetButton.addEventListener('click', function () {
+    envelope.classList.remove('active');
+    localStorage.setItem('envelopeActive', false);
+  });
+
+  // Bloquear clic derecho y teclas específicas
+  document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.key === 'u')) {
+      e.preventDefault();
+    }
+  });
 </script>
 
   
